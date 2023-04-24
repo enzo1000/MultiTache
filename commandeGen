@@ -1,0 +1,13 @@
+/*
+key_t uneClef = fotk("CheminFichier", int entier);
+
+Fait : Converti un nom de fichier et un identificateur de projet en clé IPC
+Réussi : renvoi une clé (uneClef)
+Echoue : -1 + errno()
+
+int id_obj = ?get(uneClef, ...);
+
+? => msg pour File
+  => sem pour les tableaux de sémaphores
+  => shm pour les segment de mémoire partagé ()
+*/

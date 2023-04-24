@@ -1,0 +1,18 @@
+/*
+
+droits => IPC_CREAT pour créer un fichier avec les droits fournit
+0666 Cf notes.odt
+          
+          IPC_EXCL utilisé avec IPC_CREAT garanti l'échec
+de l'appel si l'objet existe déjà.
+
+          O_RDONLY pour accéder aux fichier en lecture uniquement.
+
+int msgget(key_t uneClef, int droits);
+
+Fait : Permet d'obtenir l'id d'une file de message à partir
+de sa clé et de droits fourni.
+Réussi : Donne l'id de la file
+Echoue : -1 + errno()
+
+*/
