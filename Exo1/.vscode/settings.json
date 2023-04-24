@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.lex": "lex",
+        "system_error": "cpp"
+    }
+}
