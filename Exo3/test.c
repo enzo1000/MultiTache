@@ -8,15 +8,16 @@
 
 int main(int argc, char * argv[]){
   
-    if (argc!=5) {
+    if (argc!=6) {
         printf("Nbre d'args invalide, utilisation :\n");
-        printf("%s nombre-traitements nombre-zones fichier-pour-cle-ipc entier-pour-cle-ipc\n", argv[0]);
+        printf("%s nombre-traitements nombre-zones fichier-pour-cle-ipc entier-pour-cle-ipc id\n", argv[0]);
         exit(0);
     }
 
     int cle = ftok(argv[3], atoi(argv[4]));
     int nbSem = atoi(argv[1]) - 1;          //Nombre de segment à traiter
     int nbProc = atoi(argv[2]);
+    int id = atoi(argv[5]);
 
     int idSem = semget(cle, nbSem, 0600);
     if(idSem == -1){
@@ -37,9 +38,10 @@ int main(int argc, char * argv[]){
     pour le processus 2 et ainsi de suite
     */
 
+    /*
     for (int i = 0; i <= nbSem ; i++) {
         if (fork() == 0) {      //Pas à faire
-            int id = i + 1;
+            int id = i + 1; */
             printf("Je suis le proc : %d, init traitement\n", id);
             for (int j = 0; j < nbProc ; j++) {
                 //Le processus i fait "id" opérations sur la case j
@@ -88,6 +90,8 @@ int main(int argc, char * argv[]){
             }
             printf("%d : Je rend la main au prochain proc : %d\n", id, id+1);
             return 0;
-        }    
+}    
+        /*
     }
 }
+*/
