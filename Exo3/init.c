@@ -36,13 +36,13 @@ int main(int argc, char * argv[]){
   printf("sem id : %d \n", idSem);
 
   // initialisation des sémaphores à 0
-  ushort tabinit[nbSem];
+  unsigned short tabinit[nbSem];
   for (int i = 0; i < nbSem; i++) tabinit[i] = 1;
 
   union semun{
     int val;
     struct semid_ds * buf;
-    ushort * array;
+    unsigned short * array;
   } valinit;
   
   valinit.array = tabinit;
@@ -53,7 +53,7 @@ int main(int argc, char * argv[]){
   }
 
   /* test affichage des valeurs des sémaphores du tableau */
-  valinit.array = (ushort*)malloc(nbSem * sizeof(ushort));
+  valinit.array = (unsigned short*)malloc(nbSem * sizeof(unsigned short));
 
   if (semctl(idSem, nbSem, GETALL, valinit) == -1){
     perror("erreur initialisation sem : ");

@@ -1,3 +1,5 @@
+//Vieille version avec fork
+
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -34,10 +36,10 @@ int main(int argc, char * argv[]){
 
   // Le programme est inutilement compliqué, il nous n'est pas demandé de réaliser des fork()
   // On peut donc supprimer 1 boucle
-  /*for (int i = 0; i < nbProc ; i++) {       //On lance i processeurs (nbProc)
-    if (fork() == 0) {                      //Pas à faire*/
+  for (int i = 0; i < nbProc ; i++) {       //On lance i processeurs (nbProc)
+    if (fork() == 0) {                      //Pas à faire
       for (int j = 0; j < nbSem ; j++) {    //Qui vont réaliser j étapes (nbSem)
-        calcul(1);                        //Ils effectuent un calcul
+        calcul(i%2);                        //Ils effectuent un calcul
 
         struct sembuf op[] = {{j, -1, 0}, {j, 0, 0}};   //Structure d'instruction pour :
         //Décrémenter (Opération P)
@@ -61,18 +63,18 @@ int main(int argc, char * argv[]){
         printf("%d ] \n", val.array[nbSem-1]);
 
         //Attente
-        printf("Mise en attente du proc \n");
+        printf("Mise en attente du proc %d \n", i);
         if(semop(idSem, op+1, 1) < 0) {
           perror("erreur semop :");
           exit(-1);
         }
-        printf("Rdv n°%d effectué par ! \n", j);
+        printf("Rdv n°%d effectué par %d ! \n", j, i);
         free(val.array);
       }
-      printf("Fin du programme pour \n");
+      printf("Fin du programme pour %d\n", i);
       return 0;
-    /*}
+    }
   }
 
-  return 0;*/
+  return 0;
 }
